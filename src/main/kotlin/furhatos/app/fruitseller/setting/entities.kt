@@ -4,6 +4,9 @@ import furhatos.nlu.ComplexEnumEntity
 import furhatos.nlu.EnumEntity
 import furhatos.nlu.Intent
 import furhatos.nlu.ListEntity
+import furhatos.nlu.common.Number
+import furhatos.nlu.common.PersonName
+import furhatos.nlu.common.Time
 import furhatos.util.Language
 
 // Our Fruit entity.
@@ -16,14 +19,21 @@ class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
 // Our BuyFruit intent
 class BuyFruit(var fruits : FruitList? = null) : Intent() {
     override fun getExamples(lang: Language): List<String> {
-        return listOf("@fruits", "I want @fruits", "I would like @fruits", "I want to buy a @fruits")
+        return listOf("@fruits", "I want @fruits", "I would like @fruits", "I want to buy @fruits")
+    }
+}
+
+class SayName(val name : PersonName? = null) : Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf("@name", "My is is @name", "I'm called @name")
     }
 }
 
 class FruitList : ListEntity<QuantifiedFruit>()
 
+
 class QuantifiedFruit(
-        val count : Number? = 2,
+        val count : Number? = Number(1),
         val fruit : Fruit? = null) : ComplexEnumEntity() {
 
     override fun getEnum(lang: Language): List<String> {

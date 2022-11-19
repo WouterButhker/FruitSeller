@@ -3,42 +3,23 @@ package furhatos.app.fruitseller.flow.main
 import furhatos.app.fruitseller.flow.Parent
 import furhatos.app.fruitseller.setting.BuyFruit
 import furhatos.app.fruitseller.setting.Fruit
-import furhatos.flow.kotlin.State
-import furhatos.flow.kotlin.furhat
-import furhatos.flow.kotlin.onResponse
-import furhatos.flow.kotlin.state
+import furhatos.app.fruitseller.setting.order
+import furhatos.flow.kotlin.*
 import furhatos.nlu.Intent
 import furhatos.nlu.common.No
 import furhatos.nlu.common.Yes
 import furhatos.util.Language
 
-val TakingOrder : State = state(Parent) {
+val TakingOrder = state(parent = Options) {
     onEntry {
         random(
-                {furhat.ask("Would you like some fruits?")},
-                {furhat.ask("Do you want some fruits?")}
+                { furhat.ask("Would you like some fruits?") },
+                { furhat.ask("Do you want some fruits?") }
         )
-    }
-
-    onResponse<Yes> {
-        random(
-                { furhat.ask("What kind of fruit do you want?") },
-                { furhat.ask("What type of fruit?") }
-        )
-        goto(Idle)
-    }
-
-    onResponse<RequestOptions> {
-        furhat.say("We have ${Fruit().optionsToText()}")
-        furhat.ask("Do you want some?")
-    }
-
-    onResponse<BuyFruit> {
-        furhat.say("${it.intent.fruits}, what a lovely choice!")
     }
 
     onResponse<No> {
-        furhat.say("Okay, that's a shame. Have a splendid day!")
+        furhat.say("Okay, that's a shame. Have a splendid day " + users.current.data.get("name") + "!")
         goto(Idle)
     }
 }
