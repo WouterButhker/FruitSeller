@@ -12,7 +12,7 @@ import furhatos.util.Language
 // Our Fruit entity.
 class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
-        return listOf("banana", "orange", "apple", "cherimoya")
+        return listOf("banana", "orange", "apple", "cherimoya", "apricot", "Pear", "cherry", "kiwi", "Coconut", "Blueberry", "strawberry", "avocado")
     }
 }
 
@@ -50,6 +50,14 @@ class RequestOptions: Intent() {
         return listOf("What options do you have?",
                 "What fruits do you have?",
                 "What are the alternatives?",
-                "What do you have?", "what are the possibilities?")
+                "What do you have?", "what are the possibilities?", "I don't know")
     }
 }
+
+
+class ReceiveTime (var time : Time? = null)  : Intent(){
+    override fun getExamples(lang: Language): List<String> {
+        return listOf("@time", "I want it delivered at @time", "by @time")
+    }
+}
+

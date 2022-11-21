@@ -2,6 +2,7 @@ package furhatos.app.fruitseller.flow.main
 
 import furhatos.app.fruitseller.flow.Parent
 import furhatos.app.fruitseller.setting.BuyFruit
+import furhatos.app.fruitseller.setting.RequestOptions
 import furhatos.app.fruitseller.setting.Fruit
 import furhatos.app.fruitseller.setting.order
 import furhatos.flow.kotlin.*
@@ -24,14 +25,6 @@ val TakingOrder = state(parent = Options) {
     }
 }
 
-class RequestOptions: Intent() {
-    override fun getExamples(lang: Language): List<String> {
-        return listOf("What options do you have?",
-                "What fruits do you have?",
-                "What are the alternatives?",
-                "What do you have?")
-    }
 
-}
 
 
